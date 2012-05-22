@@ -1,0 +1,70 @@
+<head>
+  <title>Swerve</title>
+</head>
+
+<body>
+  <section id="app">
+    {{> views}}
+    {{> modal}}
+  </section>
+</body>
+
+<template name="views">
+  {{#if viewis}}
+    {{> main}}
+  {{/if}}
+  {{#if viewis "interestsExternal"}}
+    {{> interestsExternal}}
+  {{/if}}
+</template>
+
+<template name="main">
+  <section class="mosiac">
+    {{> feature}}
+    {{> interests}}
+    {{> footer}}
+  </section>
+</template>
+
+<template name="mosiac">
+  <section class="mosiac">
+  </section>
+</template>
+
+<template name="modal">
+  <section class="modal">
+    <section class="content">
+    </section>
+  </section>
+</template>
+
+<template name="feature">
+  <section class="feature item">
+    <section class="user">
+      <a href="/" class="image">
+        <img src="/placeholders/user.jpg">
+      </a>
+      <label>Jenna Marie</label>
+    </section>
+  </section>
+</template>
+
+<template name="comment">
+  <div class="comment {{ownerClass}}">
+    <a href="#user" class="user"><img src="{{image}}" /></a>
+    <a href="#user" class="handle">{{handle}}</a>
+    <span class="message">{{message}}</span>
+  </div>
+</template>
+
+<template name="newComment">
+  <form class="new-comment">
+    <input type="string" placeholder="Have something to say?" value="{{message}}" />
+  </form>
+</template>
+
+<template name="footer">
+  <footer>
+    <a href="{{swervd}}" id="swerve">Swerve</a>
+  </footer>
+</template>

@@ -1,0 +1,468 @@
+// * Mixins *
+
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  -o-{prop} args
+  {prop} args
+
+animation()
+  vendor('animation', arguments)
+
+border-radius()
+  vendor('border-radius', arguments)
+
+border-top-radius() 
+  vendor('border-top-left-radius', arguments)
+  vendor('border-top-right-radius', arguments)
+
+border-top-radius() 
+  vendor('border-bottom-left-radius', arguments)
+  vendor('border-bottom-right-radius', arguments)
+
+linear-gradient(start_color, end_color, start = left top, end = left bottom)
+  mozstart = top if start = left top
+  background start_color
+  background -moz-linear-gradient(mozstart, start_color 0%, end_color 100%)
+  background -webkit-gradient(linear, start, end, color-stop(0%, start_color), color-stop(100%, end_color))
+  -webkit-background-origin padding-box
+
+background-clip()
+  vendor('background-clip', arguments)
+
+box-shadow() 
+  -moz-box-shadow arguments
+  -webkit-box-shadow arguments
+  box-shadow arguments
+
+box(orient, pack, align) 
+  display -webkit-box
+  display -moz-box
+  display box
+  vendor('box-orient', orient)
+  vendor('box-pack', pack)
+  vendor('box-align', align)
+  vendor('box-lines', multiple)
+
+box_flex()
+  vendor('box-flex', arguments)
+
+text-fill-color()
+  vendor('text-fill-color', arguments)
+
+transition()
+  vendor('transition', arguments)
+
+transform()
+  vendor('transform', arguments)
+
+// * Reset *
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td
+	margin: 0
+	padding: 0
+	border: 0
+	outline: 0
+	font-size: 100%
+	vertical-align: baseline
+	background: transparent
+
+body
+	line-height: 1
+	
+ol, ul
+	list-style: none
+
+blockquote, q
+	quotes: none
+
+:focus
+	outline: 0
+
+ins
+	text-decoration: none
+
+del
+	text-decoration: line-through
+
+table
+	border-collapse: collapse
+	border-spacing: 0
+
+// * Animations *
+
+@keyframes fade-in-down
+  0%
+    opacity: 0
+    transform: translateY(-50px)
+  100%
+    opacity: 1
+    transform: translateY(0px)
+
+@keyframes appear
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+@keyframes fade
+  0%
+    opacity: 1
+  100%
+    opacity: 0
+
+
+// * Mixins *
+
+animate-fade-in-down(duration)
+  animation-name: fade-in-down
+  animation-duration: duration
+
+animate-appear(duration)
+  animation-name: appear
+  animation-duration: duration
+
+animate-fade(duration)
+  animation-name: fade
+  animation-duration: duration
+
+// * Globals *
+
+html, body
+  width: 100%
+  height: 100%
+  padding: 0px
+  margins: 0px
+  font: normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-weight: 300
+
+body
+  linear-gradient: #333, #111
+  background-position: fixed
+  
+  &.light
+    linear-gradient: #fff, #efefef
+
+
+// * Application *
+
+section#app
+  position: absolute
+  top: 0px
+  left: 0px
+  right: 0px
+  bottom: 0px
+  overflow: auto
+  padding: 50px 50px 100px 50px
+  
+  &.modal-open
+    overflow: hidden
+
+
+//  * Footer *
+
+footer
+  position: fixed
+  bottom: 0px
+  left: 0px
+  right: 0px
+  height: 75px
+  line-height: 75px
+  background: #000
+  text-align: center
+  box-shadow: 0px -5px 20px rgba(0,0,0,0.9);
+  z-index: 100000
+  
+  a
+    color: #ccc
+    text-decoration: none
+    transition: all, 0.5s
+    
+    &:hover
+      color: #fff
+  
+  a#swerve
+    color: #fff
+    font-size: 30px
+    letter-spacing: -1px
+    text-transform: lowercase
+    
+    &:hover
+      text-shadow: 0px 0px 10px rgba(255,255,255,0.8)
+
+
+// * Mosiacs *
+
+section.mosiac
+  margin: auto
+  padding: 20px
+  visibility: hidden
+  
+  &.isotope
+    visibility: visible
+  
+  section.item
+    cursor: pointer
+    width: 200px
+    text-align: center
+    color: #fff
+    background: #fff
+    margin-bottom: 10px
+    border: 1px solid #000
+    visibility: hidden
+    transition: all 0.3s
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.4)
+    
+    &.isotope-item
+      visibility: visible
+    
+    a.image
+      display: block
+      
+      img
+        width: 100%
+        vertical-align: top
+    
+    label
+      cursor: pointer
+      position: absolute
+      left: 0px
+      bottom: 0px
+      right: 0px
+      height: 0px
+      font-size: 14px
+      font-weight: bold
+      line-height: 30px
+      letter-spacing: -1px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      padding: 0px 15px
+      background: rgba(0,0,0,0.8)
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.5)
+      transition: background, 0.3s
+    
+    .price
+      position: absolute
+      top: 10px
+      right: 10px
+      font-size: 15px
+      font-weight: 500
+      line-height: 1.5em
+      padding: 0px 0.5em
+      border-radius: 1em
+      text-shadow: 0px 1px 4px rgba(0,0,0,0.8)
+      background: rgba(0,0,0,0.1)
+      box-shadow: 0px 1px 4px rgba(0,0,0,0.1)
+      transition: all, 0.2s
+    
+    &:hover
+      z-index: 100
+      box-shadow: 0px 5px 20px rgba(0,0,0,0.8)
+
+      label
+        height: 30px
+        
+      .price
+        font-size: 25px
+        background: rgba(0,0,0,0.8)
+        box-shadow: 0px 1px 5px rgba(0,0,0,0.8)
+    
+  
+  section.feature
+  
+    &:hover
+      label
+        height: 50px
+        background: rgba(0,0,0,0.95)
+    
+    label
+      height: 50px
+      line-height: 50px
+      font-size: 20px
+      font-weight: normal
+
+// * Comments *
+
+section.comments
+  color: #fff
+  font-weight: normal
+  
+  div.comment
+    position: relative
+    background: #202020
+    text-align: left
+    padding: 10px 10px 12px 10px
+    padding-left: 65px
+    white-space: break-word
+    text-shadow: 0px 1px 0px #000
+    border-top: 1px solid #252525
+    border-bottom: 1px solid #191919
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.4)
+    
+    a.user
+      position: absolute
+      display: block
+      left: 10px
+      width: 40px
+      height: 40px
+      overflow: hidden
+      background: #fff
+      line-height: 37px
+      box-shadow: 0px 1px 4px rgba(0,0,0,0.4)
+  
+      img
+        max-width: 100%
+        vertical-align: middle
+        
+    a.handle
+      color: #0cf
+      font-size: 12px
+      font-weight: bold
+      text-decoration: none
+      
+      &:hover
+        color: #0ff
+    
+    .message
+      display: block
+      white-space: break-word
+      
+    &.you
+      text-align: right
+      padding-left: 10px
+      padding-right: 65px
+    
+      a.user
+        left: inherit
+        right: 10px
+        
+      a.handle
+        content: "You"
+
+
+// * New Comment *
+
+form.new-comment
+  position: relative
+  height: 50px
+  
+  input[type="string"]
+    position: absolute
+    top: 0px
+    left: 0px
+    right: 0px
+    bottom: 0px
+    outline: none
+    background: #fff
+    border: none
+    padding: 20px
+    font-size: 15px
+    margin: 0px
+    box-shadow: 0px 0px 15px #000
+    
+      
+// * Transitions *
+
+
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.6s;
+     -moz-transition-duration: 0.6s;
+      -ms-transition-duration: 0.6s;
+       -o-transition-duration: 0.6s;
+          transition-duration: 0.6s;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:         top, left, opacity;
+          transition-property:         transform, opacity;
+}
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+
+// * Modals *
+
+section.modal
+  position: fixed
+  top: 0px
+  left: 0px
+  right: 0px
+  bottom: 0px
+  z-index: 1000
+  display: none
+  overflow: auto
+  text-align: center
+  background: rgba(0,0,0,0.8)
+  
+  &.show
+    display: block
+    animate-appear: 0.5s
+    
+  section.content
+    display: inline-block
+    margin: 50px auto 120px auto
+    border: 1px solid #000
+    animate-fade-in-down: 0.5s
+    box-shadow: 0px 5px 30px #000
+    
+// * Interest *
+
+section.interest.popout
+  transition: width 0.2s
+  a.image
+    img
+      vertical-align: top
+      min-width: 400px
+      max-width: 700px
+      
+// * Add - Interest - External *
+
+section.interest.external
+  position: absolute
+  top: 0px
+  left: 0px
+  width: 100%
+  height: 100%
+  
+  img
+    width: 100%
+    
+  form
+    position: fixed
+    left: 0px
+    bottom: 0px
+    right: 0px
+    
+    input[type="string"]
+      width: 100%
+      outline: none
+      background: rgba(255,255,255,0.9)
+      border: none
+      padding: 20px
+      font-size: 15px
+      margin: 0px
+      box-shadow: 0px -10px 15px rgba(0,0,0,0.4)
+      transition: background 0.3s
+      
+      &:focus
+        background: #fff

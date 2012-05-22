@@ -1,0 +1,39 @@
+<template name="interests">
+  {{#each interests}}
+    {{> interest}}
+  {{/each}}
+</template>
+
+<template name="interest">
+  <section class="item interest">
+    <a href="javascript:void(0)" class="image">
+      <img src="{{image}}" />
+    </a>
+    <label>{{label}}</label>
+    <!--<span class="price">${{price}}</span>-->
+  </section>
+</template>
+
+<template name="showInterest">
+  <section class="interest popout">
+    {{#with model}}
+      <a href="#randomurl" class="image"><img src="{{image}}"></a>
+    {{/with}}
+    <section class="comments">
+      {{#each comments}}
+        {{> comment}}
+      {{/each}}
+    </section>
+    {{> newComment}}
+  </section>
+</template>
+
+<template name="interestsExternal">
+  <section class="interest external">
+    <img src="{{image}}" />
+    <form class="new external">
+      <input type="string" class="label" placeholder="Describe your image.." autofocus="autofocus" />
+      <input type="hidden" class="url" value="{{image}}" />
+    </form>
+  </section>
+</template>
